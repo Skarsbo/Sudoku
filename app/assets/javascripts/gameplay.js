@@ -35,17 +35,16 @@ function SudokuMain(clues) {
 		this.index = index;
 		this.value = 0;
 		this.isClue = false;
-		this.isLocked = false;
+		this.isLocked = (Math.random() > 0.9)? true : false;
 		this.notes = [];
 		this.select = function() {
 			if (this.isClue || this.isLocked) return;
 			selectedCell = this.index;
 		}
 		this.getColor = function() {
-			if(this.isClue) return "#bbb";
-			else if(this.isLocked) return "#ddd";
-			else if(this.isSelected) return "#dd4";
-			else return "white";
+			if		(this.isClue) 	return "#ded";
+			else if	(this.isLocked) return "#ddd";
+			else 					return "white";
 		}
 		this.x = function() { return index%9; }
 		this.y = function() { return Math.floor(index/9); }
