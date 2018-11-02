@@ -14,10 +14,12 @@ function SudokuMain(clues) {
 	document.onkeydown = function(event) {
 		if(selectedCell < 0) return;
 		let val = parseInt(event.key);
-		if(isNaN(val) || val == 0) return;
+		if(event.key === "Delete") val = 0;
+		if(isNaN(val)) return;
 		cells[selectedCell].value = val;
-		selectedCell = -1;
 		redrawBoard();
+		if(isNaN(val) || val == 0) return;
+		selectedCell = -1;
 	}
 
 	function blinkCursor() {
