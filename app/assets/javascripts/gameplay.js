@@ -15,6 +15,11 @@ function SudokuMain(clues) {
 		if(selectedCell < 0) return;
 		let val = parseInt(event.key);
 		if(event.key === "Delete") val = 0;
+		else if(event.key === "Escape") {
+			selectedCell = -1;
+			redrawBoard();
+			return;
+		}
 		if(isNaN(val)) return;
 		cells[selectedCell].value = val;
 		redrawBoard();
