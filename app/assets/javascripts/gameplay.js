@@ -25,6 +25,21 @@ function SudokuMain(clues) {
 		selectedCell = -1;
 	}
 
+	window.onresize = function(event) {
+		// reassigns game board size when browser is resized
+		var board = document.getElementById("board");
+		setSize(board);
+	}
+
+	function setSize(b) {
+		// sets the size of the game board according to
+		// browser window width and height
+		let w = window.innerWidth * 0.95;
+		let h = window.innerHeight * 0.8;
+		let size = Math.min(w, h);
+		b.setAttribute("width", size);
+	}
+	
 	function blinkCursor() {
 		if(selectedCell >= 0) {
 			var rect = document.getElementById(selectedCell);
@@ -77,6 +92,7 @@ function SudokuMain(clues) {
 		initializeBoard(board, cells);
 		
 		function initializeBoard(board, cells) {
+			setSize(board);
 			board.setAttribute("viewBox", "0 0 100 100");
 			board.setAttribute("style", "background: black;");
 			var border1 = 0.2; // width of thin borders (as % of board width)

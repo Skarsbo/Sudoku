@@ -1,10 +1,8 @@
 <h1>Gameplay#index</h1>
 
-<svg id="board" width="50%"></svg>
+<svg id="board"></svg>
 
 <script>
-	var clues = <%= @clues %>;
-
-	//SudokuMain(clues);
+	let clues = <%= @clues %>;
 	window.onload = function() {SudokuMain(clues)};
 </script>
