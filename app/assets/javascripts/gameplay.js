@@ -4,10 +4,12 @@ function SudokuMain(clues) {
 	var svgns = "http://www.w3.org/2000/svg";
 	var cells;
 	var selectedCell = -1;
+	var timer = 650;
 	
 	console.log(clues);
 	createSudokuBoard(clues);
 	setInterval(blinkCursor, 1000/30);
+	var clockTick = setInterval(clock, 100);
 
 	document.onkeydown = function(event) {
 		if(selectedCell < 0) return;
@@ -46,6 +48,18 @@ function SudokuMain(clues) {
 			var v = new Date().getMilliseconds();
 			v = Math.sin(v/500*Math.PI)*64 +192;
 			rect.setAttribute("fill", "rgb("+v+","+v+","+v+")");
+		}
+	}
+
+	function clock() {
+		let cl = document.getElementById('clock');
+		let m = Math.floor(timer/600).toString().padStart(2, '0');
+		let s = (Math.floor(timer/10)%60).toString().padStart(2, '0');
+		let cs = (timer%10).toString().padEnd(2, '0');
+		cl.innerHTML = m +":"+ s +":"+ cs;
+		if(timer > 0) timer -= 1;
+		else {
+			clearInterval(clockTick);
 		}
 	}
 
@@ -94,7 +108,10 @@ function SudokuMain(clues) {
 		function initializeBoard(board, cells) {
 			setSize(board);
 			board.setAttribute("viewBox", "0 0 100 100");
-			board.setAttribute("style", "background: black;");
+			let style = "background: black;"
+				style += "display: block;"
+				style += "margin: 0 auto;"
+			board.setAttribute("style", style);
 			var border1 = 0.2; // width of thin borders (as % of board width)
 			var border2 = 0.6; // further width added to thick borders
 			var cellWidth = (100 -border1*10 -border2*4) /9;
